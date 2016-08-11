@@ -1,27 +1,21 @@
-html, body {
-	height: 100%;
-	background-color: green;
-/*	margin: 0 auto;*/
+
+body {
+  font: 10px sans-serif;
 }
 
-#wrapper {
-    width:100%;
-    height: 100%;
-	margin: 0 auto;
-
-    overflow:hidden;
-
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
 }
-#sidebar {
-    float:left;
-    width:100px;
-    background-color: red;
+
+.x.axis path {
+  display: none;
 }
-/*#content {
-    margin: 0px;
-    background-color: green;
-	width: 100%;
-}*/
-div {
-/*    border:1px solid #333;*/
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
 }
