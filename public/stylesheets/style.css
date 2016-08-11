@@ -7,15 +7,15 @@ body {
 .axis line {
   fill: none;
   stroke: #000;
-  shape-rendering: crispEdges;
+  shape-rendering: auto;
 }
 
-.x.axis path {
+/*.x.axis path {
   display: none;
-}
+}*/
 
 .line {
   fill: none;
   stroke: steelblue;
-  stroke-width: 1.5px;
+  stroke-width: 1px;
 }
