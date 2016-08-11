@@ -1,12 +1,23 @@
+html {
+	background-color: #cadcdc;
+}
 
 body {
   font: 10px sans-serif;
+  color: #828283;
+}
+
+h1 {
+	color: #cf5054;
+	font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+	font-weight: 400;
+	font-size: 2rem;
 }
 
 .axis path,
 .axis line {
   fill: none;
-  stroke: #000;
+  stroke: #828283;
   shape-rendering: auto;
 }
 
@@ -16,6 +27,11 @@ body {
 
 .line {
   fill: none;
-  stroke: steelblue;
+  stroke: #9e78cd;
   stroke-width: 1px;
+}
+
+.nav {
+	padding-left: 2rem;
+	padding-top: .75rem;
 }
