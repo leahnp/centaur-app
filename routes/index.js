@@ -4,6 +4,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.status(200).json({whatevs: 'it works!!!!'})
+  // res.status(200).json({whatevs: 'it works!!!!'})
+  res.render('index')
 });
 module.exports = router;
