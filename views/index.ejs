@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <style>
+      .line {
+        fill: none;
+        stroke: steelblue;
+        stroke-width: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="viz"></div>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        var svg = d3.select("#viz")
+            .append("svg")
+            .attr("width", 400)
+            .attr("height", 400);    
+
+        //var data = [[10, 10], [20, 20], [30, 30]]; 
+   
+        $.get("small_trot.dat", function (data) {
+          d3.dsvFormat(' ').parseRows(data, function (data2) {
+            console.log(data2);
+
+            var line = d3.line();
+            svg.append("path")
+              .datum(data2)
+              .attr("class", "line")
+              .attr("d", line);
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
