@@ -9,5 +9,17 @@
     <h1>CENTAUR</h1>
   </div>
   <p>Capture screen</p>
+  <script type="text/javascript">
+
+    window.ondevicemotion = function(event) {  
+      var accelerationX = event.accelerationIncludingGravity.x;  
+      var accelerationY = event.accelerationIncludingGravity.y;  
+      var accelerationZ = event.accelerationIncludingGravity.z;  
+    }  
+
+  </script>
+
+  <a href="/capture/start">Start</a>
+
   </body>
 </html>
