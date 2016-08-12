@@ -3,53 +3,63 @@
 	<head>
 		<link rel='stylesheet' href='/stylesheets/style.css'/>
 		<meta name="viewport" content="width=device-width,user-scalable=yes" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	</head>
 
 <body>
-<div id="content">
-    <h1>Accelerometer Javascript Test</h1>
-<ul>
-	<li>acceleration x: <span id="accelerationX"></span>g</li>
-	<li>acceleration y: <span id="accelerationY"></span>g</li>
-	<li>acceleration z: <span id="accelerationZ"></span>g</li>
-</ul>
+	<div id="content">
+		<h1>Capture Motion</h1>
+		<ul>
+			<li>acceleration x: <span id="accelerationX"></span>g</li>
+			<li>acceleration y: <span id="accelerationY"></span>g</li>
+			<li>acceleration z: <span id="accelerationZ"></span>g</li>
+		</ul>
 
-</div>
+		<a id="start" href='/capture'>Start</a>
+		<br><br><br><br>
+		<a id="stop" href='/capture'>Stop!!!</a>
+
+	</div>
 	<script type="text/javascript">
 
-	var x = 0, y = 0,
-	    vx = 0, vy = 0,
-		ax = 0, ay = 0;
+		$(document).ready(function(){
+	    $("#start").click(function(event){
+	      event.preventDefault();
+	      startCapture();
+	    });
+
+	    $("#stop").click(function(event){
+	      event.preventDefault();
+	      stopCapture();
+	    });
+	});
 
 	var storage = [];
 
-	if (window.DeviceMotionEvent != undefined) {
-		window.ondevicemotion = function(e) {
-			ax = event.accelerationIncludingGravity.x * 5;
-			ay = event.accelerationIncludingGravity.y * 5;
-			document.getElementById("accelerationX").innerHTML = e.accelerationIncludingGravity.x;
-			document.getElementById("accelerationY").innerHTML = e.accelerationIncludingGravity.y;
-			document.getElementById("accelerationZ").innerHTML = e.accelerationIncludingGravity.z;	
-		}
+	function startCapture() {
+	  console.log("Starting......whirrrrr")
+	  window.ondevicemotion = capture
+	}
 
-		setInterval( function() {
-			var landscapeOrientation = window.innerWidth/window.innerHeight > 1;
-			if ( landscapeOrientation) {
-				vx = vx + ay;
-				vy = vy + ax;
-			} else {
-				vy = vy - ay;
-				vx = vx + ax;
-			}
-			vx = vx * 0.98;
-			vy = vy * 0.98;
-			y = parseInt(y + vy / 50);
-			x = parseInt(x + vx / 50);
-			
-			boundingBoxCheck();
-			
-		}, 25);
-	} 
+	function stopCapture() {
+	    console.log("Stopping")
+	    console.log(storage)
+		    $.post("localhost:3000/upload_data", storage, {
+		      // reset storage for next run
+		      storage = []
+		    });
+
+	    window.ondevicemotion = undefined
+	}
+
+	function capture(e) {
+
+	    var x = e.accelerationIncludingGravity.x;
+	    var y = e.accelerationIncludingGravity.y;
+	    var z = e.accelerationIncludingGravity.z;  
+
+	    storage.push([x,y,z])
+	}
 
 	</script>
 </body>
