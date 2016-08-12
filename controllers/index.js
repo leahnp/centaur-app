@@ -4,11 +4,11 @@
 var IndexController = {
 
 	startCapture: function(req, res) {
-	    window.ondevicemotion = function(event) {  
-	      var accelerationX = event.accelerationIncludingGravity.x;  
-	      var accelerationY = event.accelerationIncludingGravity.y;  
-	      var accelerationZ = event.accelerationIncludingGravity.z;  
-	    }  
+	    // window.ondevicemotion = function(event) {  
+	    //   var accelerationX = event.accelerationIncludingGravity.x;  
+	    //   var accelerationY = event.accelerationIncludingGravity.y;  
+	    //   var accelerationZ = event.accelerationIncludingGravity.z;  
+	    // }  
 
 		media.remove(req.params.id, function(error) {
 			if(error=="Could not add to db") {

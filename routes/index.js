@@ -12,11 +12,11 @@ router.get('/', function(req, res, next) {
 /* GET capture page. */
 router.get('/capture', function(req, res, next) {
   // res.status(200).json({whatevs: 'it works!!!!'})
-  res.render('capture')
+  res.render('capture1')
 });
 
 /* GET START page. */
-router.get('/capture/start', Controller.startCapture) 
+// router.get('/capture/start', Controller.startCapture) 
 
 
 module.exports = router;

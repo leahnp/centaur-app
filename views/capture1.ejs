@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<link rel='stylesheet' href='/stylesheets/style.css'/>
+		<meta name="viewport" content="width=device-width,user-scalable=yes" />
+	</head>
+
+<body>
+<div id="content">
+    <h1>Accelerometer Javascript Test</h1>
+<ul>
+	<li>acceleration x: <span id="accelerationX"></span>g</li>
+	<li>acceleration y: <span id="accelerationY"></span>g</li>
+	<li>acceleration z: <span id="accelerationZ"></span>g</li>
+</ul>
+
+</div>
+	<script type="text/javascript">
+
+	var x = 0, y = 0,
+	    vx = 0, vy = 0,
+		ax = 0, ay = 0;
+
+	var storage = [];
+
+	if (window.DeviceMotionEvent != undefined) {
+		window.ondevicemotion = function(e) {
+			ax = event.accelerationIncludingGravity.x * 5;
+			ay = event.accelerationIncludingGravity.y * 5;
+			document.getElementById("accelerationX").innerHTML = e.accelerationIncludingGravity.x;
+			document.getElementById("accelerationY").innerHTML = e.accelerationIncludingGravity.y;
+			document.getElementById("accelerationZ").innerHTML = e.accelerationIncludingGravity.z;	
+		}
+
+		setInterval( function() {
+			var landscapeOrientation = window.innerWidth/window.innerHeight > 1;
+			if ( landscapeOrientation) {
+				vx = vx + ay;
+				vy = vy + ax;
+			} else {
+				vy = vy - ay;
+				vx = vx + ax;
+			}
+			vx = vx * 0.98;
+			vy = vy * 0.98;
+			y = parseInt(y + vy / 50);
+			x = parseInt(x + vx / 50);
+			
+			boundingBoxCheck();
+			
+		}, 25);
+	} 
+
+	</script>
+</body>
+</html>
