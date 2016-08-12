@@ -32,7 +32,7 @@
         var line = d3.svg.line()    
             .x(function(d) { return x(d.secs); })
             .y(function(d) { return y(d.accel); })
-            .interpolate("monotone");
+            .interpolate("basis");
 
         var svg = d3.select("body").append("svg")
             .attr("width", width + margin.left + margin.right)
