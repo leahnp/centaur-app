@@ -3,6 +3,20 @@
 <meta charset="utf-8">
   <head>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+
+    $(document).ready(function(){
+        $("a").click(function(){
+                          window.ondevicemotion = function(event) {  
+                            var accelerationX = event.accelerationIncludingGravity.x;  
+                            var accelerationY = event.accelerationIncludingGravity.y;  
+                            var accelerationZ = event.accelerationIncludingGravity.z;  
+                          }  
+                          console.log(accelerationZ)
+        });
+    });
+    </script>
   </head>
 <body>
   <div class='nav'>
@@ -11,15 +25,10 @@
   <p>Capture screen</p>
   <script type="text/javascript">
 
-    window.ondevicemotion = function(event) {  
-      var accelerationX = event.accelerationIncludingGravity.x;  
-      var accelerationY = event.accelerationIncludingGravity.y;  
-      var accelerationZ = event.accelerationIncludingGravity.z;  
-    }  
 
   </script>
 
-  <a href="/capture/start">Start</a>
+  <a href="/capture">Start</a>
 
   </body>
 </html>
