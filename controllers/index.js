@@ -4,12 +4,12 @@
 var IndexController = {
 
 	uploadData: function(req, res) {
-		console.log(req.body)
+		console.log(req.body.undefined)
 		var path = require('path');
 		var fs = require("fs");
-		var path_ = __dirname + "/data/test.txt";
+		var path_ = __dirname + "/data/test.dat";
 		// var path_ = path.join("../data/", 'output', 'test.txt');
-		var data = "Hello";
+		var data = req.body;
 
 		// helper.write = function(data,filename){
 		//   if(typeof data !== "string") data = JSON.stringify(data);
