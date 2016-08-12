@@ -44,9 +44,10 @@
 	function stopCapture() {
 	    console.log("Stopping")
 	    console.log(storage)
-		    $.post("localhost:3000/upload_data", storage, {
+		    $.post("/upload_data", storage, function(data) {
 		      // reset storage for next run
-		      storage = []
+		      storage = [];
+		      console.log(data)
 		    });
 
 	    window.ondevicemotion = undefined
