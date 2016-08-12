@@ -16,11 +16,10 @@ router.get('/capture', function(req, res, next) {
 });
 
 // take in data
-// route.get('/upload_data', Controller.uploadData)
-router.post('/upload_data', function(req, res, next) {
-  res.status(200).json({whatevs: 'it works!!!!'})
-  // res.render('capture1')
-});
+router.post('/upload_data', Controller.uploadData)
+// router.post('/upload_data', function(req, res, next) {
+//   res.status(200).json({whatevs: 'it works!!!!'})
+// });
 
 /* GET START page. */
 // router.get('/capture/start', Controller.startCapture) 
