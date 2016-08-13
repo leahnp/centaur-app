@@ -9,74 +9,69 @@
 <body>
   <div id="content">
     <h1>Capture Motion</h1>
-    <ul>
-      <li>acceleration x: <span id="accelerationX"></span>g</li>
-      <li>acceleration y: <span id="accelerationY"></span>g</li>
-      <li>acceleration z: <span id="accelerationZ"></span>g</li>
-    </ul>
 
-    <button id="record-general">Start recording general</button>
+    <button class="record" data-type="general">Start recording general</button>
     <br>
-    <button id="record-walk">Start recording walk</button>
+    <button class="record" data-type="walk">Start recording walk</button>
     <br>
-    <button id="record-trot">Start recording trot</button>
+    <button class="record" data-type="trot">Start recording trot</button>
     <br>
-    <button id="record-canter">Start recording canter</button>
+    <button class="record" data-type="canter">Start recording canter</button>
   </div>
   <script type="text/javascript">
+    var recording = false;
+    var captureType = null;
+    var captureData = null;
 
-    $(document).ready(function(){
-      $("#record-canter").click(function(event) {
-        event.preventDefault();
-
-        if (recording) {
-          recording = false;
-          $(this).text('Start recording');
-          stopCapture();
-        } else {
-          recording = true;
-          $(this).text('Stop recording');
-          startCapture();
-        }
+    $(document).ready(function () {
+      $(".record").click(function (event) {
+        var el = $(this);
+        toggleRecording(el);
       });
     });
 
-    var recording = false;
-    var storage = [];
+    function toggleRecording(el) {
+      captureType = el.data('type');
 
-    function toggleRecording(type) {
+      if (recording) {
+        // stop recording
+        recording = false;
 
-    }
+        // set button text
+        el.text("Start recording " + captureType);
 
-    function startCapture() {
-      console.log("Starting......whirrrrr");
-      window.ondevicemotion = capture;
-    }
-
-    function stopCapture() {
-        console.log("Stopping")
-
+        // post captured data to server
         $.ajax({
           method: "POST",
           url: "/upload_data",
-          data: JSON.stringify(storage),
+          data: JSON.stringify({
+            type: captureType,
+            data: captureData
+          }),
           contentType: "application/json",
           success: function(data) {
-            // reset storage for next run
-            storage = [];
+            // reset captureData for next run
+            captureData = [];
             console.log(data)
           }
         });
 
         window.ondevicemotion = undefined;
+      } else {
+        // start recording
+        recording = true;
+        captureData = [];
+
+        // set button text
+        el.text("Stop recording " + captureType);
+
+        // start receiving motion events from browser
+        window.ondevicemotion = capture;
+      }
     }
 
     function capture(e) {
-        var x = e.acceleration.x;
-        var y = e.acceleration.y;
-        var z = e.acceleration.z;  
-
-        storage.push([x, y, z])
+      captureData.push([e.timeStamp, e.acceleration.x, e.acceleration.y, e.acceleration.z])
     }
 
   </script>
