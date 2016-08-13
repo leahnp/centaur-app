@@ -1,51 +1,49 @@
-// var Books = require("../models/books_model");
-
+var fs = require("fs");
 
 var IndexController = {
+  uploadData: function(req, res) {
+    // path is relative to cwd
+    // console.log(process.cwd());
+    var filename = "data/test.dat";
+    var data = req.body;
 
-	uploadData: function(req, res) {
-		console.log(req.body.undefined)
-		var path = require('path');
-		var fs = require("fs");
-		var path_ = __dirname + "/data/test.dat";
-		// var path_ = path.join("../data/", 'output', 'test.txt');
-		var data = req.body;
+    // convert javascript array to space delimeted
+    // list of x, y, z accel values
+    var output = "";
+    for (var i = 0; i < data.length; i++) {
+      var row = data[i];
+      output += row[0] + " " + row[1] + " " + row[2] + "\n";
+    }
 
-		// helper.write = function(data,filename){
-		//   if(typeof data !== "string") data = JSON.stringify(data);
-		//   var file = path.join(__dirname, 'output', filename);
-		//   fs.writeFileSync(file, data);
-		// };
+    fs.writeFile(filename, output, function(error) {
+       if (error) {  
+         console.error("write error:  " + error.message);
+         return;
+       }
 
-		fs.writeFile(path_, data, function(error) {
-		     if (error) {
-		       console.error("write error:  " + error.message);
-		     } else {
-		     		console.log('incallback')
-		       res.redirect('/capture1')
-		     }
-		});
-	}
+       res.sendStatus(200);
+    });
+  }
 
-	// startCapture: function(req, res) {
-	//     // window.ondevicemotion = function(event) {  
-	//     //   var accelerationX = event.accelerationIncludingGravity.x;  
-	//     //   var accelerationY = event.accelerationIncludingGravity.y;  
-	//     //   var accelerationZ = event.accelerationIncludingGravity.z;  
-	//     // }  
+  // startCapture: function(req, res) {
+  //     // window.ondevicemotion = function(event) {  
+  //     //   var accelerationX = event.accelerationIncludingGravity.x;  
+  //     //   var accelerationY = event.accelerationIncludingGravity.y;  
+  //     //   var accelerationZ = event.accelerationIncludingGravity.z;  
+  //     // }  
 
-	// 	media.remove(req.params.id, function(error) {
-	// 		if(error=="Could not add to db") {
-	// 			res.status(404).send(error)
-	// 		} else if (error) {
-	// 			// var err = "Please try again"
-	// 			res.status(500).send(error)
-	// 		} else {
-	// 			console.log("final else")
-	// 			res.redirect('/' + req.body.media)
-	// 		}
-	// 	})
-	// }
+  //  media.remove(req.params.id, function(error) {
+  //    if(error=="Could not add to db") {
+  //      res.status(404).send(error)
+  //    } else if (error) {
+  //      // var err = "Please try again"
+  //      res.status(500).send(error)
+  //    } else {
+  //      console.log("final else")
+  //      res.redirect('/' + req.body.media)
+  //    }
+  //  })
+  // }
 }
 
 
