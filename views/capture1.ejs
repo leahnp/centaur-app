@@ -1,67 +1,84 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-	<head>
-		<link rel='stylesheet' href='/stylesheets/style.css'/>
-		<meta name="viewport" content="width=device-width,user-scalable=yes" />
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	</head>
+  <head>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <meta name="viewport" content="width=device-width,user-scalable=yes" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  </head>
 
 <body>
-	<div id="content">
-		<h1>Capture Motion</h1>
-		<ul>
-			<li>acceleration x: <span id="accelerationX"></span>g</li>
-			<li>acceleration y: <span id="accelerationY"></span>g</li>
-			<li>acceleration z: <span id="accelerationZ"></span>g</li>
-		</ul>
+  <div id="content">
+    <h1>Capture Motion</h1>
+    <ul>
+      <li>acceleration x: <span id="accelerationX"></span>g</li>
+      <li>acceleration y: <span id="accelerationY"></span>g</li>
+      <li>acceleration z: <span id="accelerationZ"></span>g</li>
+    </ul>
 
-		<a id="start" href='/capture'>Start</a>
-		<br><br><br><br>
-		<a id="stop" href='/capture'>Stop!!!</a>
+    <button id="record-general">Start recording general</button>
+    <br>
+    <button id="record-walk">Start recording walk</button>
+    <br>
+    <button id="record-trot">Start recording trot</button>
+    <br>
+    <button id="record-canter">Start recording canter</button>
+  </div>
+  <script type="text/javascript">
 
-	</div>
-	<script type="text/javascript">
+    $(document).ready(function(){
+      $("#record-canter").click(function(event) {
+        event.preventDefault();
 
-		$(document).ready(function(){
-	    $("#start").click(function(event){
-	      event.preventDefault();
-	      startCapture();
-	    });
+        if (recording) {
+          recording = false;
+          $(this).text('Start recording');
+          stopCapture();
+        } else {
+          recording = true;
+          $(this).text('Stop recording');
+          startCapture();
+        }
+      });
+    });
 
-	    $("#stop").click(function(event){
-	      event.preventDefault();
-	      stopCapture();
-	    });
-	});
+    var recording = false;
+    var storage = [];
 
-	var storage = [];
+    function toggleRecording(type) {
 
-	function startCapture() {
-	  console.log("Starting......whirrrrr")
-	  window.ondevicemotion = capture
-	}
+    }
 
-	function stopCapture() {
-	    console.log("Stopping")
-	    console.log(storage)
-		    $.post("/upload_data", storage, function(data) {
-		      // reset storage for next run
-		      storage = [];
-		      console.log(data)
-		    });
+    function startCapture() {
+      console.log("Starting......whirrrrr");
+      window.ondevicemotion = capture;
+    }
 
-	    window.ondevicemotion = undefined
-	}
+    function stopCapture() {
+        console.log("Stopping")
 
-	function capture(e) {
+        $.ajax({
+          method: "POST",
+          url: "/upload_data",
+          data: JSON.stringify(storage),
+          contentType: "application/json",
+          success: function(data) {
+            // reset storage for next run
+            storage = [];
+            console.log(data)
+          }
+        });
 
-	    var x = e.accelerationIncludingGravity.x;
-	    var y = e.accelerationIncludingGravity.y;
-	    var z = e.accelerationIncludingGravity.z;  
+        window.ondevicemotion = undefined;
+    }
 
-	    storage.push([x,y,z])
-	}
+    function capture(e) {
+        var x = e.acceleration.x;
+        var y = e.acceleration.y;
+        var z = e.acceleration.z;  
 
-	</script>
+        storage.push([x, y, z])
+    }
+
+  </script>
 </body>
 </html>
