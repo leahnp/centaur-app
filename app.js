@@ -33,8 +33,8 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 // this will terminate the request with an error 400 if the POST body
 // doesn't contain valid json
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 

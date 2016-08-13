@@ -4,7 +4,7 @@ var IndexController = {
   uploadData: function(req, res) {
     var data = req.body.data;
 
-    console.log(data)
+
     // convert javascript array to space delimeted
     // list of x, y, z accel values
     var output = "";
