@@ -1,6 +1,7 @@
 import sys
 
 # for user predict data, runs when called from predict.py
+# data is array of user motion info
 def run_process(data):
 	first_line = True
 	first_ms = 0
@@ -26,5 +27,9 @@ def run_process(data):
 
 # for training data, runs if called from terminal
 if __name__ == '__main__':
-	print(run_process(sys.stdin))
+	in_data = []
+	for line in sys.stdin:
+		#might need to make subarray?
+		in_data.append([line])
+	print(run_process(in_data))
 
