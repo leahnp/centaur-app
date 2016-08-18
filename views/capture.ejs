@@ -1,36 +1,79 @@
 <!DOCTYPE html>
-<html>
-<meta charset="utf-8">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <link rel='stylesheet' href='/stylesheets/style.css'/>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"> </script>
-    <script>
-
-    $(document).ready(function(){
-      console.log('hello?')
-        $("a").click(function(){
-                          window.ondevicemotion = function(event) {  
-                            var accelerationX = event.accelerationIncludingGravity.x;  
-                            var accelerationY = event.accelerationIncludingGravity.y;  
-                            var accelerationZ = event.accelerationIncludingGravity.z;  
-                          }  
-                          console.log('in ondevicemotion')
-                          console.log(accelerationY)
-        });
-    });
-    </script>
+    <meta name="viewport" content="width=device-width,user-scalable=yes" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   </head>
-<body>
-  <div class='nav'>
-    <h1>CENTAUR</h1>
-  </div>
-  <p>Capture screen</p>
-  <script type="text/javascript">
 
+<body>
+  <div id="content">
+    <h1>Capture Motion</h1>
+
+    <button class="record" data-type="general">Start recording general</button>
+    <br>
+    <button class="record" data-type="walk">Start recording walk</button>
+    <br>
+    <button class="record" data-type="trot">Start recording trot</button>
+    <br>
+    <button class="record" data-type="canter">Start recording canter</button>
+  </div>
+  <script type="text/javascript">
+    var recording = false;
+    var captureType = null;
+    var captureData = null;
+
+    $(document).ready(function () {
+      $(".record").click(function (event) {
+        var el = $(this);
+        toggleRecording(el);
+      });
+    });
+
+    function toggleRecording(el) {
+      captureType = el.data('type');
+
+      if (recording) {
+        // stop recording
+        recording = false;
+
+        // set button text
+        el.text("Start recording " + captureType);
+
+        // post captured data to server
+        $.ajax({
+          method: "POST",
+          url: "/upload_data",
+          data: JSON.stringify({
+            type: captureType,
+            data: captureData
+          }),
+          contentType: "application/json",
+          success: function(data) {
+            // reset captureData for next run
+            captureData = [];
+            console.log(data)
+          }
+        });
+
+        window.ondevicemotion = undefined;
+      } else {
+        // start recording
+        recording = true;
+        captureData = [];
+
+        // set button text
+        el.text("Stop recording " + captureType);
+
+        // start receiving motion events from browser
+        window.ondevicemotion = capture;
+      }
+    }
+
+    function capture(e) {
+      captureData.push([e.timeStamp, e.acceleration.x, e.acceleration.y, e.acceleration.z])
+    }
 
   </script>
-
-  <a href="/capture">Start</a>
-
-  </body>
+</body>
 </html>
