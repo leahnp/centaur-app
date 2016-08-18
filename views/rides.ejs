@@ -15,7 +15,7 @@
   <div>
     <% if (typeof rides == 'object' && rides) {%>
       <% for (var ride in rides) { %>
-        <a href="/process_data"><%=rides[ride]%></a>
+        <a href="/process_data/" + <%=rides[ride]%>><%=rides[ride]%></a>
       <%}%> 
     <%}%>
   </div>
