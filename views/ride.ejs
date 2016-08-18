@@ -8,11 +8,12 @@
 
 <body>
   <div id="content">
-    <h1>Capture Motion</h1>
+    <h1>User Capture Motion</h1>
 
     <button class="record" data-type="user">Start recording your ride</button>
     <br>
   </div>
+
   <script type="text/javascript">
     var recording = false;
     var captureType = null;
@@ -38,7 +39,7 @@
         // post captured data to server
         $.ajax({
           method: "POST",
-          url: "/upload_data",
+          url: "/save_data",
           data: JSON.stringify({
             type: captureType,
             data: captureData
@@ -48,6 +49,7 @@
             // reset captureData for next run
             captureData = [];
             console.log(data)
+            window.location.href  = '/rides';
           }
         });
 
