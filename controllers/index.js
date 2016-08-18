@@ -16,10 +16,12 @@ var IndexController = {
     // generate unique file name
     var splitOutput = output.split(' ')
     var filename = req.body.type + "-" + parseInt(splitOutput[0] + ".dat") 
+    // var filename = req.body.type + "-" + date + ".dat"
     // path is relative to cwd
     // console.log(process.cwd());
     var filepath = "data/" + filename;
 
+    count += 1
 
     fs.writeFile(filepath, output, function(error) {
        if (error) {  
