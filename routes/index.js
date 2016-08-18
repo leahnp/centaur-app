@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Controller = require('../controllers/index')
+var RideController = require('../controllers/ride')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -12,7 +13,7 @@ router.get('/', function(req, res, next) {
 /* GET capture page. */
 router.get('/capture', function(req, res, next) {
   // res.status(200).json({whatevs: 'it works!!!!'})
-  res.render('capture1')
+  res.render('capture')
 });
 
 /* GET capture page. */
@@ -21,14 +22,23 @@ router.get('/ride', function(req, res, next) {
   res.render('ride')
 });
 
-// take in data
+// take in data for training
 router.post('/upload_data', Controller.uploadData)
-// router.post('/upload_data', function(req, res, next) {
-//   res.status(200).json({whatevs: 'it works!!!!'})
-// });
 
-/* GET START page. */
-// router.get('/capture/start', Controller.startCapture) 
+
+// take in data from users for predicting
+router.post('/save_data', RideController.saveData)
+
+// take in data from users for predicting
+router.get('/process_data/:id', RideController.processData)
+
+// take in data from users for predicting
+router.get('/rides', RideController.showRidesData)
+/* GET capture page. */
+// router.get('/rides', function(req, res, next) {
+//   // res.status(200).json({whatevs: 'it works!!!!'})
+//   res.render('rides')
+// });
 
 
 module.exports = router;
