@@ -27,18 +27,28 @@ def expire_data(window_end):
       break
     pop_data()
 
-for line in sys.stdin:
-  split = line.split(' ')
-  time = float(split[0])
-  accel = [float(split[1]), float(split[2]), float(split[3])]
-  accel_len = math.sqrt(accel[0]*accel[0] + accel[1]*accel[1] + accel[2]*accel[2])
-  accel_normalized = [accel[0] / accel_len, accel[1] / accel_len, accel[2] / accel_len]
 
-  # push new data to the window
-  push_data(time, accel_normalized[0])
+def run_feature3(data):
+  for line in sys.stdin:
+    split = line.split(' ')
+    time = float(split[0])
+    accel = [float(split[1]), float(split[2]), float(split[3])]
+    accel_len = math.sqrt(accel[0]*accel[0] + accel[1]*accel[1] + accel[2]*accel[2])
+    accel_normalized = [accel[0] / accel_len, accel[1] / accel_len, accel[2] / accel_len]
 
-  # expire old data from the window
-  expire_data(time)
+    # push new data to the window
+    push_data(time, accel_normalized[0])
 
-  mean_zaccel = window_total / len(window_data)
-  print("%f %f" % (time, mean_zaccel))
+    # expire old data from the window
+    expire_data(time)
+
+    mean_zaccel = window_total / len(window_data)
+    print("%f %f" % (time, mean_zaccel))
+
+# for training data, runs if called from terminal
+if __name__ == '__main__':
+  in_data = []
+  for line in sys.stdin:
+    #might need to make subarray?
+    in_data.append([line])
+  print(run_feature3(in_data))
