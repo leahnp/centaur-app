@@ -1,0 +1,118 @@
+#!/usr/bin/env bash
+
+#################################################
+# initial processing of raw data
+#################################################
+for input in {predict_raw,training_raw}/*; do
+	# generate output filename by removing _raw from input filename
+	output=${input/_raw/}
+	output=${output/.dat/-processed.dat}
+
+	# generate label number from input filename
+	label=3
+	if [[ $input == *"walk"* ]]
+	then
+		label=0
+	elif [[ $input == *"trot"* ]]
+	then
+		label=1
+	elif [[ $input == *"canter"* ]]
+	then
+		label=2
+	fi
+
+	echo "processing $input to $output"
+    python process.py $label < $input > $output
+done
+
+#################################################
+# extract features
+#################################################
+for input in {predict,training}/*-processed.dat; do
+	output_feature1=${input/-processed.dat/-feature1.dat}
+	output_feature2=${input/-processed.dat/-feature2.dat}
+	output_feature3=${input/-processed.dat/-feature3.dat}
+	output_features=${input/-processed.dat/-features.dat}
+
+	echo "extracting features from $input"
+
+	# extract individual features
+	python feature1.py < $input > $output_feature1
+	python feature2.py < $input > $output_feature2
+	python feature3.py < $input > $output_feature3
+
+	# merge all features
+	paste -d ' ' $input $output_feature1 $output_feature2 $output_feature3 > $output_features
+done
+
+#################################################
+# generate the training model
+#################################################
+feature_filenames=$(find training/*-features.dat)
+
+echo "generating training model"
+
+python train.py model/knn $feature_filenames
+
+#################################################
+# generate prediction and probability data
+#################################################
+for input in predict/*-features.dat; do
+	output_predict=${input/-features.dat/-predict.dat}
+	output_proba=${input/-features.dat/-proba.dat}
+
+	echo "generating prediction / proba data for $input"
+
+	python predict.py model/knn < $input > $output_predict
+	python proba.py model/knn < $input > $output_proba
+done
+
+#################################################
+# generate graphs
+#################################################
+for input in {predict,training}/*-processed.dat; do
+	output=${input/.dat/.jpg}
+
+	echo "graphing $input"
+
+	echo "set terminal jpeg size 1024, 768 enhanced" > gnuplot.cmd
+	echo "plot '$input' using 1:2 title 'x-accel' with line lc rgb 'red', \
+	           '$input' using 1:3 title 'y-accel' with line lc rgb 'green', \
+	           '$input' using 1:4 title 'z-accel' with line lc rgb 'blue'" >> gnuplot.cmd
+	gnuplot gnuplot.cmd > $output
+done
+
+for input in {predict,training}/*-feature*.dat; do
+	output=${input/.dat/.jpg}
+
+	echo "graphing $input"
+
+	echo "set terminal jpeg size 1024, 768 enhanced" > gnuplot.cmd
+	echo "plot '$input' with line" >> gnuplot.cmd
+	gnuplot gnuplot.cmd > $output
+done
+
+for input in predict/*-predict.dat; do
+	output=${input/.dat/.jpg}
+
+	echo "graphing $input"
+
+	echo "set terminal jpeg size 1024, 768 enhanced" > gnuplot.cmd
+	echo "set palette maxcolors 3" >> gnuplot.cmd
+	echo "set palette defined (0 'red', 1 'green', 2 'blue')" >> gnuplot.cmd
+	echo "set cbrange [0:3]" >> gnuplot.cmd
+	echo "plot '$input' lt palette" >> gnuplot.cmd
+	gnuplot gnuplot.cmd > $output
+done
+
+for input in predict/*-proba.dat; do
+	output=${input/.dat/.jpg}
+
+	echo "graphing $input"
+
+	echo "set terminal jpeg size 1024, 768 enhanced" > gnuplot.cmd
+	echo "plot '$input' using 1:2 title 'walk' with line lc rgb 'red', \
+	           '$input' using 1:3 title 'trot' with line lc rgb 'green', \
+	           '$input' using 1:4 title 'canter' with line lc rgb 'blue'" >> gnuplot.cmd
+	gnuplot gnuplot.cmd > $output
+done
