@@ -15,6 +15,12 @@ router.get('/capture', function(req, res, next) {
   res.render('capture1')
 });
 
+/* GET capture page. */
+router.get('/ride', function(req, res, next) {
+  // res.status(200).json({whatevs: 'it works!!!!'})
+  res.render('ride')
+});
+
 // take in data
 router.post('/upload_data', Controller.uploadData)
 // router.post('/upload_data', function(req, res, next) {
