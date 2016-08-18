@@ -1,3 +1,11 @@
 .DS_Store
 node_modules/
 data/
+oracle/training/
+oracle/training_raw/
+oracle/predict/
+oracle/predict_raw/
+oracle/model/
+NOTES
+data_copy/
+data_copy_copy/
