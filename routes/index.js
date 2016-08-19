@@ -17,23 +17,19 @@ router.get('/capture', function(req, res, next) {
 });
 
 /* GET capture page. */
-router.get('/ride', function(req, res, next) {
-  // res.status(200).json({whatevs: 'it works!!!!'})
-  res.render('ride')
-});
+router.get('/ride', RideController.index)
+
+// take in data from users for predicting
+router.get('/ride/:id', RideController.view)
+
+// take in data from users for predicting
+router.post('/ride/save', RideController.save)
 
 // take in data for training
 router.post('/upload_data', Controller.uploadData)
 
-
 // take in data from users for predicting
-router.post('/save_data', RideController.saveData)
-
-// take in data from users for predicting
-router.get('/process_data/:id', RideController.processData)
-
-// take in data from users for predicting
-router.get('/rides', RideController.showRidesData)
+// router.get('/rides', RideController.showRidesData)
 /* GET capture page. */
 // router.get('/rides', function(req, res, next) {
 //   // res.status(200).json({whatevs: 'it works!!!!'})
