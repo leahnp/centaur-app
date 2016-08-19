@@ -1,8 +1,7 @@
 var fs = require("fs");
+var child = require('child_process');
 
 var IndexController = {
-
-
   index: function(req, res, next) {
     fs.readdir('data', function(err, files) {
       if (err) {
@@ -19,10 +18,24 @@ var IndexController = {
   },
 
   view: function(req, res) {
-    // var spawn = require('child_process').spawn,
-    // py    = spawn('python', ['../oracle/predict.py']),
-    // data = [1,2,3,4,5,6,7,8,9],
-    // dataString = '';
+    var filename = req.params.id
+    var filepath = "data/" + filename;
+
+    // read data from file
+    var filestream = fs.createReadStream(filepath);
+
+    // start python process
+    var process = child.execFile('python', ['test.py'], function (err, stdout, stderr) {
+      if (err) return next(err);
+
+      // console.log(stdout);
+      // console.log(stderr);
+
+      res.status(200).end();
+    });
+
+    // write data from file to python process's stdin
+    filestream.pipe(process.stdin);
 
   },
 
