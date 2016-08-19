@@ -12,7 +12,13 @@
 
     <button class="record" data-type="user">Start recording your ride</button>
     <br>
+    <div>
+      <% for (var ride of rides) { %>
+        <a href="ride/" + <%=ride%> ><%=ride%></a>
+      <%}%> 
+    </div>
   </div>
+
 
   <script type="text/javascript">
     var recording = false;
@@ -39,7 +45,7 @@
         // post captured data to server
         $.ajax({
           method: "POST",
-          url: "/save_data",
+          url: "ride/save",
           data: JSON.stringify({
             type: captureType,
             data: captureData
@@ -49,7 +55,7 @@
             // reset captureData for next run
             captureData = [];
             console.log(data)
-            window.location.href  = '/rides';
+            window.location.reload();
           }
         });
 
