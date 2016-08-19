@@ -12,11 +12,16 @@ import feature3
 
 #make data array
 data = []
-f = argv[1]
-with open('predict_raww/' + f) as input_file:
-    for line in input_file:
-    	data.append([line])
+# f = argv[1]
+# for line in sys.stdin:
+# with open(sys.stdin) as input_file:
+#   for line in input_file:
+for line in sys.stdin:
+	print "heya pal"
+	data.append([line])
 
+# print data
+# exit(0)
 # process data
 processed_data = process.run_process(data)
 
