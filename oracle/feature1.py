@@ -28,8 +28,10 @@ def expire_data(window_end):
     pop_data()
 
 def run_feature1(data):
-  for line in data:
-    split = line.split(' ')
+  output = []
+  # I don't know why this is working...(stdin not data)
+  for split in data:
+    # split = line.split(' ')
     time = float(split[0])
     accel = [float(split[1]), float(split[2]), float(split[3])]
     accel_len = math.sqrt(accel[0]*accel[0] + accel[1]*accel[1] + accel[2]*accel[2])
@@ -42,7 +44,8 @@ def run_feature1(data):
     expire_data(time)
 
     mean_accel_len = window_total / len(window_data)
-    print("%f %f" % (time, mean_accel_len))
+    output.append([time, mean_accel_len])
+  return output
 
 
   # for training data, runs if called from terminal

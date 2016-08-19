@@ -17,7 +17,7 @@ data = []
 # with open(sys.stdin) as input_file:
 #   for line in input_file:
 for line in sys.stdin:
-	print "heya pal"
+	# print "heya pal"
 	data.append([line])
 
 # print data
@@ -35,25 +35,27 @@ feature2_data = feature2.run_feature2(processed_data)
 feature3_data = feature3.run_feature3(processed_data)
 
 #zip features
-features = zip(feature1_data, feature2_data, feature3_data)
+# features = zip(feature1_data, feature2_data, feature3_data)
+print features
+exit(0)
 
-#run run_predict()
-predicted_data = run_predict(features)
+# zip features
+for subarray in 
 
 
 def run_predict(features):
-	if len(sys.argv[1]) < 2:
-	  print "specify model file"
-	  exit(1)
+	# if len(sys.argv[1]) < 2:
+	#   print "specify model file"
+	#   exit(1)
 
-	model_filename = sys.argv[1]
+	model_filename = 'oracle/model/knn'
 
 	# load data from stdin
 	samples = []
 	features = []
 
-	for line in sys.stdin:
-	  split = line.rstrip().split(' ')
+	for split in features:
+	  # split = line.rstrip().split(' ')
 	  samples.append([float(split[0]), float(split[3])])
 	  features.append([float(split[6]), float(split[8]), float(split[10])])
 
@@ -66,6 +68,13 @@ def run_predict(features):
 
 	for sample, label in zip(samples, labels):
 	  print str(sample[0]) + ' ' + str(sample[1]) + ' ' + str(label) 
+
+
+#run run_predict()
+predicted_data = run_predict(features)
+print predicted_data
+exit(0)
+
 
 # for training data, runs if called from terminal
 if __name__ == '__main__':

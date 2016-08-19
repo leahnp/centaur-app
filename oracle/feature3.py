@@ -29,8 +29,9 @@ def expire_data(window_end):
 
 
 def run_feature3(data):
-  for line in sys.stdin:
-    split = line.split(' ')
+  output = []
+  for split in data:
+    # split = line.split(' ')
     time = float(split[0])
     accel = [float(split[1]), float(split[2]), float(split[3])]
     accel_len = math.sqrt(accel[0]*accel[0] + accel[1]*accel[1] + accel[2]*accel[2])
@@ -43,7 +44,8 @@ def run_feature3(data):
     expire_data(time)
 
     mean_zaccel = window_total / len(window_data)
-    print("%f %f" % (time, mean_zaccel))
+    output.append([time, mean_zaccel])
+  return output
 
 # for training data, runs if called from terminal
 if __name__ == '__main__':

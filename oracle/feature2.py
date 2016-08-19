@@ -4,8 +4,8 @@ import sys
 
 WINDOW_LENGTH = 2.0
 
-last_accel = None
-last_time = None
+# last_accel = None
+# last_time = None
 window_data = []
 window_total = 0.0
 
@@ -29,8 +29,11 @@ def expire_data(window_end):
     pop_data()
 
 def run_feature2(data):
-  for line in sys.stdin:
-    split = line.split(' ')
+  last_accel = None
+  last_time = None
+  output = []
+  for split in data:
+    # split = line.split(' ')
     time = float(split[0])
     accel = float(split[3])
 
@@ -52,10 +55,11 @@ def run_feature2(data):
     if len(window_data):
       mean_beat = window_total / len(window_data)
       
-    print("%f %f" % (time, mean_beat))
-
+    output.append([time, mean_beat])
     # track accel to see when the accel crosses the x-axis
     last_accel = accel
+  return output
+
 
 
 # for training data, runs if called from terminal
