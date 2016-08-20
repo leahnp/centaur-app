@@ -29,11 +29,9 @@ def expire_data(window_end):
 
 def run_feature1(data):
   output = []
-  # I don't know why this is working...(stdin not data)
-  for split in data:
-    # split = line.split(' ')
-    time = float(split[0])
-    accel = [float(split[1]), float(split[2]), float(split[3])]
+  for row in data:
+    time = row[0]
+    accel = [row[1], row[2], row[3]]
     accel_len = math.sqrt(accel[0]*accel[0] + accel[1]*accel[1] + accel[2]*accel[2])
     # accel_normalized = [accel[0] / accel_len, accel[1] / accel_len, accel[2] / accel_len]
 
@@ -49,9 +47,9 @@ def run_feature1(data):
 
 
   # for training data, runs if called from terminal
-if __name__ == '__main__':
-  in_data = []
-  for line in sys.stdin:
-    #might need to make subarray?
-    in_data.append([line])
-  print(run_feature1(in_data))
+# if __name__ == '__main__':
+#   in_data = []
+#   for row in sys.stdin:
+#     #might need to make subarray?
+#     in_data.append([row])
+#   print(run_feature1(in_data))

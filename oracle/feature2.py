@@ -1,5 +1,4 @@
 # feature 2 - mean beat length
-
 import sys
 
 WINDOW_LENGTH = 2.0
@@ -32,10 +31,9 @@ def run_feature2(data):
   last_accel = None
   last_time = None
   output = []
-  for split in data:
-    # split = line.split(' ')
-    time = float(split[0])
-    accel = float(split[3])
+  for row in data:
+    time = row[0]
+    accel = row[3]
 
     # check if the accel is crossing the x-axis 
     if last_accel and (last_accel >= 0.0) != (accel >= 0.0):
@@ -63,9 +61,9 @@ def run_feature2(data):
 
 
 # for training data, runs if called from terminal
-if __name__ == '__main__':
-  in_data = []
-  for line in sys.stdin:
-    #might need to make subarray?
-    in_data.append([line])
-  print(run_feature2(in_data))
+# if __name__ == '__main__':
+#   in_data = []
+#   for line in sys.stdin:
+#     #might need to make subarray?
+#     in_data.append([line])
+#   print(run_feature2(in_data))
