@@ -17,7 +17,7 @@ var IndexController = {
     })
   },
 
-  view: function(req, res) {
+  view: function(req, res, next) {
     var filename = req.params.id
     var filepath = "data/" + filename;
 
@@ -25,11 +25,14 @@ var IndexController = {
     var filestream = fs.createReadStream(filepath);
 
     // start python process
-    var process = child.execFile('python', ['test.py'], function (err, stdout, stderr) {
+    var process = child.execFile('python', ['oracle/predict.py'], function (err, stdout, stderr) {
       if (err) return next(err);
 
       // console.log(stdout);
       // console.log(stderr);
+
+      var data = JSON.parse(stdout);
+      console.log(data)
 
       res.status(200).end();
     });
