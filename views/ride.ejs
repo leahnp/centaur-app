@@ -12,10 +12,16 @@
 
     <button class="record" data-type="user">Start recording your ride</button>
     <br>
+
+    <h1>Past Rides</h1>
     <div>
-      <% for (var ride of rides) { %>
-        <a href="ride/<%=ride%>"><%=ride%></a>
-      <%}%> 
+      <ul>
+        <% for (var ride of rides) { %>
+          <div class="ride-card">
+            <li><a class="rides" href="ride/<%=ride%>"><%=ride%></a></li>
+          </div>
+        <%}%> 
+      </ul>
     </div>
   </div>
 
