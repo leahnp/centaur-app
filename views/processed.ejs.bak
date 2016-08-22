@@ -30,22 +30,22 @@
             .orient("left");
 
         var line = d3.svg.line()    
-            .x(function(d) { return x(d.secs); })
-            .y(function(d) { return y(d.accel); })
+            .x(function(d) { return x(d[0]); })
+            .y(function(d) { return y(d[1]); })
             .interpolate("basis");
+            // .attr("stroke", "black");
+
 
         var svg = d3.select("body").append("svg")
             .attr("width", width + margin.left + margin.right)
             .attr("height", height + margin.top + margin.bottom)
-          .append("g")
+            .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        d3.tsv("scaleminmax.tsv", type, function(error, data) {
-          console.log(data)
-          if (error) throw error;
+          var data = <%=string_data%>
 
-          x.domain(d3.extent(data, function(d) { return d.secs; }));
-          y.domain(d3.extent(data, function(d) { return d.accel; }));
+          x.domain(d3.extent(data, function(d) { return d[0]; }));
+          y.domain(d3.extent(data, function(d) { return d[1]; }));
 
           svg.append("g")
               .attr("class", "x axis")
@@ -65,15 +65,39 @@
           svg.append("path")
               .datum(data)
               .attr("class", "line")
-              .attr("d", line)
-              .attr('stroke', function(d) { return d.label; });
-        });
+              .attr("d", line);
+              // .style("stroke", function(d) { return d[2]; });
 
-        function type(d) {
-          d.secs = +d.secs;
-          d.accel = +d.accel;
-          return d;
-        }
+              // .attr('stroke', function(d) { 
+              //   console.log(d)
+              //   if(d[0] > 0.35) {
+              //     return 'red';
+              //   } else {
+              //     return 'blue';
+              //   }
+              //  });
+
+          // var lines = svg.selectAll('path')
+          //     .data(data)
+          //     .enter()
+          //     .append('line')
+          //     .attr("stroke-width", 2)
+          //     .attr('stroke', 'blue');
+              // .attr("stroke", function (d) {
+              //   console.log(d)
+              //     if(d[0] > 0.35) {
+              //     return 'red';
+              //   } else {
+              //     return 'blue';
+              //   }
+              // });
+          // .select('line')
+          //               console.log(line)
+          //     .style("stroke", function(d) { return 'red'; });
+
+
+
+
       </script>
     </div>
   </body>
