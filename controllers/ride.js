@@ -33,13 +33,16 @@ var IndexController = {
       var string_data = stdout;
       // var data = JSON.parse(stdout);
 
-      var walk = 0
-      var trot = 0
-      var canter = 0
-      var gaits = [0, 0, 0]
+      var walk = 0;
+      var trot = 0;
+      var canter = 0;
+      var total_time = 0;
+      var gaits = [0, 0, 0];
 
       // count occurances of walk, trot, canter
       for (var array of JSON.parse(string_data)) {
+        total_time = array[0];
+
         if (array[2] == 0) {
           walk += 1;
         } else if (array[2] == 1) {
@@ -53,13 +56,14 @@ var IndexController = {
       gaits[0] = walk
       gaits[1] = trot
       gaits[2] = canter
+      var total_time = Math.round(total_time / 60)
 
       // console.log(string_data)
       // need to get data to public in tsv format w/headers
       // 
       // console.log(data)
 
-      res.render('processed', {string_data: string_data, gaits: gaits})
+      res.render('processed', {string_data: string_data, gaits: gaits, total_time: total_time})
     });
 
     // write data from file to python process's stdin
