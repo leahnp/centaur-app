@@ -25,7 +25,7 @@ var IndexController = {
     var filestream = fs.createReadStream(filepath);
 
     // start python process
-    var process = child.execFile('python', ['oracle/predict.py'], function (err, stdout, stderr) {
+    var process = child.execFile('python', ['oracle/predict.py'], {maxBuffer : 500 * 1024}, function (err, stdout, stderr) {
       if (err) return next(err);
 
       // console.log(stdout);
