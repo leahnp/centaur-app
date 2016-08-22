@@ -30,11 +30,36 @@ var IndexController = {
 
       // console.log(stdout);
       // console.log(stderr);
+      var string_data = stdout;
+      // var data = JSON.parse(stdout);
 
-      var data = JSON.parse(stdout);
-      console.log(data)
+      var walk = 0
+      var trot = 0
+      var canter = 0
+      var gait_percentages = [0, 0, 0]
 
-      res.status(200).end();
+      // count occurances of walk, trot, canter
+      for (var array of JSON.parse(string_data)) {
+        if (array[2] == 0) {
+          walk += 1;
+        } else if (array[2] == 1) {
+          trot += 1;
+        } else {
+          canter += 1;
+        }
+      }
+
+      // set percentage of time spent walk, trot and cantering
+      gait_percentages[0] = (walk / JSON.parse(string_data).length) * 100
+      gait_percentages[1] = (trot / JSON.parse(string_data).length) * 100
+      gait_percentages[2] = (canter / JSON.parse(string_data).length) * 100
+
+      // console.log(string_data)
+      // need to get data to public in tsv format w/headers
+      // 
+      // console.log(data)
+
+      res.render('processed', {string_data: string_data, gait_percentages: gait_percentages})
     });
 
     // write data from file to python process's stdin
