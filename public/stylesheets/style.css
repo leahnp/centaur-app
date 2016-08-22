@@ -26,6 +26,32 @@ button {
   font-size: 16px;
 }
 
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.rides {
+  color: #cf5054;
+  font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.ride-card {
+  background-color: #eff3f4;
+  text-align: center;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.ride-card:hover { 
+    background-color: yellow;
+}
+
 .axis path,
 .axis line {
   fill: none;
@@ -47,3 +73,4 @@ button {
 	padding-left: 2rem;
 	padding-top: .75rem;
 }
+
