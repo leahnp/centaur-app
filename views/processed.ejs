@@ -7,28 +7,30 @@
 <body>
   <div class='nav'>
     <h1>CENTAUR</h1>
-
+    <ul class='nav-links'>
+      <li class='nav-links'><a href="/">Home</a></li>
+      <li class='nav-links'><a href="/ride">Ride</a></li>
+      <li class='nav-links'><a href="/contact">Dashboard</a></li>
+    </ul>
   </div>
   <script src="//d3js.org/d3.v3.min.js"></script>
-    <div class='graph'>
+    <div class='chart'>
+      <h2>Gait Chart</h2>
+      <hr>
       <script>
         var walk = <%=gaits[0]%>
         var trot = <%=gaits[1]%>
         var canter = <%=gaits[2]%>
-        console.log(walk)
-        console.log(trot)
-        console.log(canter)
 
         var dataset = {
           gaits: [walk, trot, canter]
-
         };
 
         var width = 500,
             height = 340,
             radius = Math.min(width, height) / 2;
 
-        var color = ['#38b177', '#9e78cc', '#cf4f53']
+        var color = ['#38b177', '#cf4f53', '#9e78cc']
 
         var pie = d3.layout.pie()
             .sort(null);
@@ -37,7 +39,7 @@
             .innerRadius(radius - 80)
             .outerRadius(radius - 50);
 
-        var svg = d3.select("body").append("svg")
+        var svg = d3.select(".chart").append("svg")
             .attr("width", width)
             .attr("height", height)
             .append("g")
@@ -45,11 +47,72 @@
 
         var path = svg.selectAll("path")
             .data(pie(dataset.gaits))
-          .enter().append("path")
+            .enter().append("path")
             .attr("fill", function(d, i) { return color[i]; })
             .attr("d", arc);
+      </script>
+      <img class="key-aside" src="/images/w-t-c.jpg">
+      <h3>Total time: <%=total_time%> minutes</h3>
+    </div>
+    <div class='graph'>
+      <h2>Rhythm</h2>
+      <hr>
+      <script>
+        var margin = {top: 20, right: 20, bottom: 30, left: 50},
+            width = 840 - margin.left - margin.right,
+            height = 500 - margin.top - margin.bottom;
+
+        var x = d3.scale.linear()
+            .range([0, width]);
+
+        var y = d3.scale.linear()
+            .range([height, 0]);
+
+        var xAxis = d3.svg.axis()
+            .scale(x)
+            .orient("bottom");
+
+        var yAxis = d3.svg.axis()
+            .scale(y)
+            .orient("left");
+
+        var line = d3.svg.line()    
+            .x(function(d) { return x(d[0]); })
+            .y(function(d) { return y(d[1]); })
+            .interpolate("basis");
+            // .attr("stroke", "black");
 
 
+        var svg = d3.select(".graph").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+          var data = <%=string_data%>
+
+          x.domain(d3.extent(data, function(d) { return d[0]; }));
+          y.domain(d3.extent(data, function(d) { return d[1]; }));
+
+          svg.append("g")
+              .attr("class", "x axis")
+              .attr("transform", "translate(0," + height + ")")
+              .call(xAxis);
+
+          svg.append("g")
+              .attr("class", "y axis")
+              .call(yAxis);
+            // .append("text")
+            //   .attr("transform", "rotate(-90)")
+            //   .attr("y", 6)
+            //   .attr("dy", ".71em")
+            //   .style("text-anchor", "end")
+            //   .text("Acceleration");
+
+          svg.append("path")
+              .datum(data)
+              .attr("class", "line")
+              .attr("d", line);
       </script>
     </div>
   </body>

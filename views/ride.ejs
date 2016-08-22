@@ -7,13 +7,24 @@
   </head>
 
 <body>
+  <div class='nav'>
+    <h1>CENTAUR</h1>
+    <ul class='nav-links'>
+      <li class='nav-links'><a href="/">Home</a></li>
+      <li class='nav-links'><a href="/ride">Ride</a></li>
+      <li class='nav-links'><a href="/contact">Dashboard</a></li>
+    </ul>
+  </div>
   <div id="content">
-    <h1>User Capture Motion</h1>
-
+    <div class='title-bar'>
+      <h2>User Capture Motion</h2>
+    </div>
     <button class="record" data-type="user">Start recording your ride</button>
     <br>
 
-    <h1>Past Rides</h1>
+    <div class='title-bar'>
+      <h2>Past Rides</h2>
+    </div>
     <div>
       <ul>
         <% for (var ride of rides) { %>
