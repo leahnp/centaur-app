@@ -55,9 +55,9 @@ def run_predict(data):
 
   for row in data:
     # for samples with time, zacell
-    # samples.append([row[0], row[3]])
+    samples.append([row[0], row[3]])
     # for samples with time, feat1, feat2, feat3
-    samples.append([row[0], row[6], row[8], row[10]])
+    # samples.append([row[0], row[6], row[8], row[10]]) 
     features.append([row[6], row[8], row[10]])
 
   # convert to numpy array
@@ -69,9 +69,9 @@ def run_predict(data):
 
   for sample, label in zip(samples, labels):
     # output with time, zaccel and label
-    # output.append([sample[0], sample[1], label])
+    output.append([sample[0], sample[1], label])
     # output with time, feat1, feat2, feat3, label
-    output.append([sample[0], sample[1], sample[2], sample[3], label])
+    # output.append([sample[0], sample[1], sample[2], sample[3], label])
 
   return output
 
