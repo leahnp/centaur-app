@@ -5,13 +5,26 @@ html {
 body {
   font: 10px sans-serif;
   color: #828283;
+  margin: 0;
 }
 
 h1 {
 	color: #cf5054;
 	font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
 	font-weight: 400;
-	font-size: 2rem;
+	font-size: 3rem;
+}
+
+h2 {
+  font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+  font-weight: 100;
+  font-size: 1.25rem;
 }
 
 button {
@@ -38,18 +51,18 @@ a {
   color: #cf5054;
   font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
   font-weight: 400;
-  font-size: 1rem;
+  font-size: 1.25rem;
 }
 
 .ride-card {
   background-color: #eff3f4;
   text-align: center;
   padding: 1rem;
-  margin: 1rem;
+  margin: .5rem;
 }
 
 .ride-card:hover { 
-    background-color: yellow;
+    box-shadow: 3px 3px 1px #a9a9a9;
 }
 
 .axis path,
@@ -59,10 +72,6 @@ a {
   shape-rendering: auto;
 }
 
-/*.x.axis path {
-  display: none;
-}*/
-
 .line {
   fill: none;
   stroke: #9e78cd;
@@ -71,6 +80,70 @@ a {
 
 .nav {
 	padding-left: 2rem;
-	padding-top: .75rem;
+	padding-top: .25rem;
+  height: 5rem;
+  background-color: #282d31;
 }
 
+.chart {
+  text-align: center;
+  background-color: #eff3f4;
+  /*padding: .5rem .5rem;*/
+  padding-top: .5rem;
+  margin: 1rem;
+}
+
+.graph {
+  text-align: center;
+  background-color: #eff3f4;
+  /*padding: .5rem .5rem;*/
+  padding-top: .5rem;
+  margin: 1rem;
+}
+
+.key-aside {
+/*  background-color: red;*/
+  position: absolute;
+  padding-top: 5rem;
+/*  width: 20%;
+  height: 100%;*/
+  float: right;
+}
+
+.title-bar {
+  padding: 0;
+  margin: 0;
+/*  padding-left: 2rem;
+  padding-top: .25rem;*/
+  height: 2.5rem;
+  background-color: #b5d1d1;
+}
+
+ul.nav-links {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  float: right;
+  /*background-color: #333;*/
+}
+
+li.nav-links{
+  float: left;
+}
+
+li.nav-links a{
+  display: block;
+  color: white;
+  font-size: 1rem;
+  text-align: center;
+  padding: 14px 16px;
+  font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+  text-decoration: none;
+}
+
+/*li a:hover.nav-links{
+    background-color: #111;
+}
+*/
