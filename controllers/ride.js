@@ -36,7 +36,7 @@ var IndexController = {
       var walk = 0
       var trot = 0
       var canter = 0
-      var gait_percentages = [0, 0, 0]
+      var gaits = [0, 0, 0]
 
       // count occurances of walk, trot, canter
       for (var array of JSON.parse(string_data)) {
@@ -50,16 +50,16 @@ var IndexController = {
       }
 
       // set percentage of time spent walk, trot and cantering
-      gait_percentages[0] = (walk / JSON.parse(string_data).length) * 100
-      gait_percentages[1] = (trot / JSON.parse(string_data).length) * 100
-      gait_percentages[2] = (canter / JSON.parse(string_data).length) * 100
+      gaits[0] = walk
+      gaits[1] = trot
+      gaits[2] = canter
 
       // console.log(string_data)
       // need to get data to public in tsv format w/headers
       // 
       // console.log(data)
 
-      res.render('processed', {string_data: string_data, gait_percentages: gait_percentages})
+      res.render('processed', {string_data: string_data, gaits: gaits})
     });
 
     // write data from file to python process's stdin

@@ -7,20 +7,47 @@
 <body>
   <div class='nav'>
     <h1>CENTAUR</h1>
+
   </div>
   <script src="//d3js.org/d3.v3.min.js"></script>
     <div class='graph'>
       <script>
-        
-        var walk = <%=Math.round(gait_percentages[0])%>
-        var trot = <%=Math.round(gait_percentages[1])%>
-        var canter = <%=Math.round(gait_percentages[2])%>
+        var walk = <%=gaits[0]%>
+        var trot = <%=gaits[1]%>
+        var canter = <%=gaits[2]%>
         console.log(walk)
         console.log(trot)
         console.log(canter)
 
-          
+        var dataset = {
+          gaits: [walk, trot, canter]
 
+        };
+
+        var width = 500,
+            height = 340,
+            radius = Math.min(width, height) / 2;
+
+        var color = ['#38b177', '#9e78cc', '#cf4f53']
+
+        var pie = d3.layout.pie()
+            .sort(null);
+
+        var arc = d3.svg.arc()
+            .innerRadius(radius - 80)
+            .outerRadius(radius - 50);
+
+        var svg = d3.select("body").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+        var path = svg.selectAll("path")
+            .data(pie(dataset.gaits))
+          .enter().append("path")
+            .attr("fill", function(d, i) { return color[i]; })
+            .attr("d", arc);
 
 
       </script>
