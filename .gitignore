@@ -10,3 +10,9 @@ NOTES
 data_copy/
 data_copy_copy/
 oracle/predict_raww/
+public/images/
+Dockerfile
+source-context.json
+source-contexts.json
+.dockerignore
+npm-debug.log
