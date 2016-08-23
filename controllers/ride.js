@@ -17,6 +17,25 @@ var IndexController = {
     })
   },
 
+  test_view: function(req, res, next) {
+
+    // start python process
+    var process = child.execFile('python', ['test.py'], {maxBuffer : 500 * 1024}, function (err, stdout, stderr) {
+      if (err) return next(err);
+
+      // console.log(stdout);
+      // console.log(stderr);
+      var string_data = stdout + stderr;
+      // var data = JSON.parse(stdout);
+
+
+      res.render('processed', {string_data: string_data})
+    });
+
+
+
+  },
+
   view: function(req, res, next) {
     var filename = req.params.id
     var filepath = "data/" + filename;
