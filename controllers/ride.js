@@ -17,7 +17,7 @@ var IndexController = {
     })
   },
 
-  test_view: function(req, res, next) {
+  xview: function(req, res, next) {
 
     // start python process
     var process = child.execFile('python', ['test.py'], {maxBuffer : 500 * 1024}, function (err, stdout, stderr) {
