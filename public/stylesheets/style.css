@@ -51,7 +51,16 @@ a {
 .nav {
 	padding-left: 2rem;
 	padding-top: .25rem;
+  margin: 0px;
   /*height: 5rem;*/
+  background-color: #282d31;
+}
+
+footer {
+  padding-left: 2rem;
+  padding-top: .25rem;
+  margin: 0px;
+  height: 3rem;
   background-color: #282d31;
 }
 
@@ -83,10 +92,10 @@ a {
   text-decoration: none;
 }
 
-/*li a:hover.nav-links{
-    background-color: #111;
+.nav-links a:hover {
+    text-decoration: underline;
 }
-*/
+
 
 .chart {
   text-align: center;
@@ -176,6 +185,7 @@ a {
 .header-image {
   width: 100%;
   height: 365px;
+  margin: 0px;
   background-image: url("../images/trotlolaBIG.jpg");
   background-size: cover;    
   background-repeat: no-repeat;
@@ -268,4 +278,13 @@ a {
 .about figcaption {
   display: block;
   margin: auto;
+}
+
+#average-time {
+  text-align: center;
+  padding: 0px;
+  margin: 0px;
+  /*font-family: 'Old Standard TT', 'baskerville', serif;*/
+  font-size: 3rem;
+
 }
