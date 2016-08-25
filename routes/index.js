@@ -14,8 +14,13 @@ router.get('/capture', function(req, res, next) {
   res.render('capture')
 });
 
-/* GET capture page. */
+/* GET ride page. */
 router.get('/ride', RideController.index)
+
+/* GET about page. */
+router.get('/about', function(req, res, next) {
+  res.render('about')
+});
 
 // take in data from users for predicting
 router.get('/ride/:id', RideController.view)
