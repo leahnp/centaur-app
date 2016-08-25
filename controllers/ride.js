@@ -12,7 +12,7 @@ var IndexController = {
       var rides = [];
       for (var file of files) {
         if (file.includes(".dat")) {
-          rides.push(file)
+          rides.push(file.replace(/_/g," ").replace(/x/g, ',').replace(/.dat/g, ''))
         }
       }
       res.render('ride', {rides: rides})
