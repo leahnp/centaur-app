@@ -11,7 +11,7 @@ var IndexController = {
       }
       var rides = [];
       for (var file of files) {
-        if (file.includes("user-")) {
+        if (file.includes(".dat")) {
           rides.push(file)
         }
       }
@@ -38,14 +38,6 @@ var IndexController = {
   view: function(req, res, next) {
     var filename = req.params.id
     var filepath = "data/" + filename;
-
-    // get creation date of file
-    fs.stat(filepath, function(err, stats) {
-      var myDate = new Date(stats.ctime);
-      console.log(myDate);
-      // console.log(time.getDate());
-      console.log((myDate.getMonth() + 1) + "-" + myDate.getDate() + "-" + myDate.getFullYear());
-    });
 
     // read data from file
     var filestream = fs.createReadStream(filepath);
@@ -90,6 +82,9 @@ var IndexController = {
 
   // save data after ride
   save: function(req, res, next) {
+    // get date for file name
+    var date = moment().format('MMMM Do YYYY, h:mm:ss a');
+
     var data = req.body.data;
     // list of x, y, z accel values
     var output = "";
@@ -100,7 +95,10 @@ var IndexController = {
 
     // generate unique file name
     var splitOutput = output.split(' ') 
-    var filename = "user-" + parseInt(splitOutput[0]) + ".dat"
+    // old file naming convention
+    // var filename = "user-" + parseInt(splitOutput[0]) + ".dat"
+    // new file naming convention
+    var filename = date.replace(/ /g,"_").replace(/,/g, 'x') + ".dat"
     var filepath = "data/" + filename;
 
     fs.writeFile(filepath, output, function(err) {
