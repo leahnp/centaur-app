@@ -44,11 +44,17 @@
             .append("g")
             .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
+
         var path = svg.selectAll("path")
             .data(pie(dataset.gaits))
             .enter().append("path")
             .attr("fill", function(d, i) { return color[i]; })
             .attr("d", arc);
+
+        path.append("text")
+            // .attr("text-anchor", "middle")
+            .text('test');
+
       </script>
       <img class="key-aside" src="/images/w-t-c.jpg">
       <h3>Total time: <%=total_time%> minutes</h3>
