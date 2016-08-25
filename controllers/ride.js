@@ -1,7 +1,9 @@
 var fs = require("fs");
 var child = require('child_process');
+var moment = require('moment');
 
 var IndexController = {
+  // returns list of all rides in user history
   index: function(req, res, next) {
     fs.readdir('data', function(err, files) {
       if (err) {
@@ -17,8 +19,8 @@ var IndexController = {
     })
   },
 
-  xview: function(req, res, next) {
-
+  // test processing data
+  test_view: function(req, res, next) {
     // start python process
     var process = child.execFile('python', ['test.py'], {maxBuffer : 500 * 1024}, function (err, stdout, stderr) {
       if (err) return next(err);
@@ -28,17 +30,22 @@ var IndexController = {
       var string_data = stdout + stderr;
       // var data = JSON.parse(stdout);
 
-
       res.render('processed', {string_data: string_data})
     });
-
-
-
   },
 
+  // process data, return info to display with D3
   view: function(req, res, next) {
     var filename = req.params.id
     var filepath = "data/" + filename;
+
+    // get creation date of file
+    fs.stat(filepath, function(err, stats) {
+      var myDate = new Date(stats.ctime);
+      console.log(myDate);
+      // console.log(time.getDate());
+      console.log((myDate.getMonth() + 1) + "-" + myDate.getDate() + "-" + myDate.getFullYear());
+    });
 
     // read data from file
     var filestream = fs.createReadStream(filepath);
@@ -46,12 +53,10 @@ var IndexController = {
     // start python process
     var process = child.execFile('python', ['oracle/predict.py'], {maxBuffer : 500 * 1024}, function (err, stdout, stderr) {
       if (err) return next(err);
-
       // console.log(stdout);
       // console.log(stderr);
       var string_data = stdout;
       // var data = JSON.parse(stdout);
-
       var walk = 0;
       var trot = 0;
       var canter = 0;
@@ -77,19 +82,13 @@ var IndexController = {
       gaits[2] = canter
       var total_time = Math.round(total_time / 60)
 
-      // console.log(string_data)
-      // need to get data to public in tsv format w/headers
-      // 
-      // console.log(data)
-
       res.render('processed', {string_data: string_data, gaits: gaits, total_time: total_time})
     });
-
     // write data from file to python process's stdin
     filestream.pipe(process.stdin);
-
   },
 
+  // save data after ride
   save: function(req, res, next) {
     var data = req.body.data;
     // list of x, y, z accel values
