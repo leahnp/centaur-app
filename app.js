@@ -28,6 +28,10 @@ app.use(function(req, res, next) {
 // generic error handler
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
+
+  // print to local console as well
+  console.error(err);
+
   res.render('error', {
     message: err.message,
     error: err
