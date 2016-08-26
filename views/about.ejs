@@ -2,7 +2,8 @@
 <html>
 <meta charset="utf-8">
   <head>
-    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel='stylesheet' href='/stylesheets/phone_style.css'/>
+    <link rel='stylesheet' href='/stylesheets/computer_style.css'/>
   </head>
 <body>
   <div class='nav'>
@@ -22,21 +23,19 @@
     <p>My initial goal was to process the data and find a way to automatically detect what “gait” Lola was in. Horses have three natural gaits, walking (a four beat gait), trotting (a two beat gait) and cantering (a three beat gait).</p>
     <iframe width="400" height="315" src="https://www.youtube.com/embed/_V10vBkvDTE" frameborder="0" allowfullscreen></iframe>
     <p>The first pass at trying to process the data and recognize these gaits resulted in a custom algorithm, which recognized the patterns in the limited data from one device and one horse. I wanted the next iteration of the project to be a more flexible solution – possibly for any horse and any device.  I wrote a front-end app to gather data from my cell phone and posted it to a server after each session. This hardware solution was less cumbersome and allows anyone with a smart phone to use the app.</p>
-    <img src="/images/phonesaddle.jpg">
+    <figure>
+      <img src="/images/phonesaddle.jpg">
+      <figcaption>Secord version of hardware, andriod phone.</figcaption>
+    </figure>
     <p>As for the data processing, machine learning was a possible answer and the first algorithm I tried was k-means clustering, which sorted the walk, trot and canter ‘clusters’ well but only when the “k” (in this case 3) was manually provided. I wanted an answer that required less manual supervising and finally found the k-nearest neighbor algorithm. This algorithm trains a model with several ‘features’ from the data, in this case I provided features that I felt clearly highlighted the differences between my three gaits.</p>
+    <figure>
+      <img src="/images/predict.jpg">
+      <figcaption>Example of KNN algorithm model predicting walk (red), trot (green) and canter (blue).</figcaption>
+    </figure>
+    <p>I chose a “supervised” approach to training my model meaning I manually labeled data that I knew was walk, trot or canter.  After training my model and tweaking my algorithm my app can take in unlabeled raw data and predict what sections are walk, trot or canter with good accuracy. Currently my app allows riders to record a riding session, save them in their records and process the data to get total time riding, total time in each gait and see a graph of the overall balance of their acceleration.</p>
+    <p>Moving forward I plan to continue making my machine-learning model more precise and flexible. I want to add more quantifiers like line straightness, balance of horses movements and lameness detection.</p>
+    <p>Technologies used for this project were Python, Scipy, SKlearn (a python machine learning library), javascript, nodejs, html and css. I batch processed my raw data with a bash script and used Google App Engine and Docker to deploy.</p>
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
   <script src="//d3js.org/d3.v3.min.js"></script>
     <div class='graph'>
