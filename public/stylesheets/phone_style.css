@@ -1,0 +1,293 @@
+@media screen and (max-width: 480px) {
+  html {
+    background-color: red;
+  	/*background-color: #f1f1f1;*/
+  }
+
+  body {
+    font: 10px sans-serif;
+    color: #828283;
+    margin: 0;
+  }
+
+  h1 a {
+  	color: #cf5054;
+  	font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+  	font-weight: 400;
+  	font-size: 3rem;
+  }
+
+  h2 {
+    font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+    font-weight: 100;
+    font-size: 1.25rem;
+  }
+
+  h3 {
+    font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+    font-weight: 100;
+    font-size: 1.25rem;
+  }
+
+  li {
+    list-style: none;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #828283;
+    shape-rendering: auto;
+  }
+
+  .line {
+    fill: none;
+    stroke: #9e78cd;
+    stroke-width: 1px;
+  }
+
+  .nav {
+  	padding-left: 2rem;
+  	padding-top: .25rem;
+    margin: 0px;
+    /*height: 5rem;*/
+    background-color: #282d31;
+  }
+
+  footer {
+    padding-left: 2rem;
+    padding-top: .25rem;
+    margin: 0px;
+    height: 3rem;
+    background-color: #282d31;
+  }
+
+  .nav h1 {
+    display: inline-block;
+    margin: .5rem 0;
+  }
+
+  .nav-links {
+    display: inline-block;
+    list-style-type: none;
+    margin: .7rem 0;
+    padding: 0;
+    float: right;
+    /*background-color: #333;*/
+  }
+
+  .nav-links li {
+    float: left;
+  }
+
+  .nav-links a {
+    display: block;
+    color: white;
+    font-size: 1rem;
+    text-align: center;
+    padding: 14px 16px;
+    font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+    text-decoration: none;
+  }
+
+  .nav-links a:hover {
+      text-decoration: underline;
+  }
+
+
+  .chart {
+    text-align: center;
+    background-color: #eff3f4;
+    /*padding: .5rem .5rem;*/
+    padding-top: .5rem;
+    margin: 1rem;
+  }
+
+  .graph {
+    text-align: center;
+    background-color: #eff3f4;
+    /*padding: .5rem .5rem;*/
+    padding-top: .5rem;
+    margin: 1rem;
+  }
+
+  .key-aside {
+  /*  background-color: red;*/
+    position: absolute;
+    padding-top: 5rem;
+  /*  width: 20%;
+    height: 100%;*/
+    float: right;
+  }
+
+  .title-bar {
+    padding: 0.5rem 0;
+    margin: 0.5rem 0.75rem;
+    /*background-color: #e1e3e4;*/
+    background-color: white;
+  }
+
+  .record-container {
+    display: block;
+    padding: 1rem;
+    margin: .5rem 10em;
+    background-color: #cf5054;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: .25rem;
+  }
+
+  .record-container div {
+    font-size: 16px;
+  }
+
+  .record-container:hover { 
+    box-shadow: 3px 3px 1px #a9a9a9;
+  }
+
+  .ride-list {
+    margin: 0;
+    padding: 0;
+  }
+
+  .ride-list li {
+    display: block;
+    padding: 1rem;
+    margin: .5rem 10em;
+    background-color: #f1f1f1;
+    text-align: center;
+    border-radius: .25rem;
+  }
+
+  .ride-list li:hover { 
+    box-shadow: 3px 3px 1px #a9a9a9;
+  }
+
+  .ride-list a {
+    color: #cf5054;
+    font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+    font-weight: 400;
+    font-size: 1.25rem;
+  }
+
+  .card {
+    margin: 1rem;
+    padding-bottom: 1rem;
+    box-shadow: 3px 3px 2px #a9a9a9;
+    background-color: white;
+  }
+
+
+  .header-image {
+    width: 100%;
+    height: 365px;
+    margin: 0px;
+    background-image: url("../images/trotlolaBIG.jpg");
+    background-size: cover;    
+    background-repeat: no-repeat;
+  }
+
+  .header-image h2 {
+    padding-left: 2.25rem;
+    padding-top: 4rem;
+    color: #cf5054;
+    font-family: 'Old Standard TT', 'baskerville', serif;
+    font-size: 2rem;
+    font-style: italic;
+    margin-bottom: .5rem;
+  }
+
+  .header-image p {
+    padding-left: 2.25rem;
+    margin-top: 0;
+    color: #cf5054;
+    font-family: 'Old Standard TT', 'baskerville', serif;
+    font-size: 1rem;
+  }
+
+  .first-about {
+    background-color: #cadcdc;
+    width: 100%;
+    height: 450px;
+    margin: 0;
+  }
+
+  .first-about img {
+    float: left;  
+    padding-left: 10%;
+    max-height: 250px;
+  }
+
+  .first-about h2 {
+    padding-top: 2rem;
+    text-align: center;
+    color: black;
+    font-family: 'Old Standard TT', 'baskerville', serif;
+    font-size: 2.5rem;
+    margin-bottom: 0rem;
+  }
+
+  .first-about p {
+    margin: 1rem;
+    text-align: center;
+    color: black;
+    font-family: 'Old Standard TT', 'baskerville', serif;
+    font-size: 1.5rem;
+  }
+  .points {
+    float: right;
+    margin-right: 10%;
+  }
+
+  .points img {
+    height: 4rem;
+  }
+
+  .points li {
+    margin-bottom: 5rem;
+  }
+
+  .graph {
+    width: 50%;
+  }
+
+  .about p {
+    text-align: center;
+    margin-left: 15%;
+    margin-right: 15%;
+    color: black;
+    font-family: 'Old Standard TT', 'baskerville', serif;
+    font-size: 1rem;
+  }
+
+  .about img {
+    height: 200px;
+    display: block;
+    margin: auto;
+  }
+
+  .about iframe {
+    display: block;
+    margin: auto;
+  }
+
+  .about figcaption {
+    display: block;
+    margin: auto;
+  }
+
+  #average-time {
+    text-align: center;
+    padding: 0px;
+    margin: 0px;
+    /*font-family: 'Old Standard TT', 'baskerville', serif;*/
+    font-size: 3rem;
+
+  }
+}
