@@ -1,7 +1,7 @@
 var fs = require("fs");
 
 var IndexController = {
-  uploadData: function(req, res) {
+  uploadData: function(req, res, next) {
     var data = req.body.data;
 
 
@@ -21,13 +21,10 @@ var IndexController = {
     // console.log(process.cwd());
     var filepath = "data/" + filename;
 
-    count += 1
+    // count += 1
 
-    fs.writeFile(filepath, output, function(error) {
-       if (error) {  
-         console.error("write error:  " + error.message);
-         return;
-       }
+    fs.writeFile(filepath, output, function(err) {
+       if (err) return next(err);
 
        res.sendStatus(200);
     });

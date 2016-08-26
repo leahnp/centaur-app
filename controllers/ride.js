@@ -13,6 +13,7 @@ var IndexController = {
       for (var file of files) {
         if (file.includes(".dat")) {
           rides.push(file.replace(/_/g," ").replace(/x/g, ',').replace(/.dat/g, ''))
+          // rides.push(file.replace(/_/g," ").replace(/x/g, ','))
         }
       }
       res.render('ride', {rides: rides})
@@ -24,7 +25,6 @@ var IndexController = {
     // start python process
     var process = child.execFile('python', ['test.py'], {maxBuffer : 500 * 1024}, function (err, stdout, stderr) {
       if (err) return next(err);
-
       // console.log(stdout);
       // console.log(stderr);
       var string_data = stdout + stderr;
@@ -36,7 +36,7 @@ var IndexController = {
 
   // process data, return info to display with D3
   view: function(req, res, next) {
-    var filename = req.params.id
+    var filename = req.params.id.replace(/ /g,"_").replace(/,/g, 'x') + ".dat"
     var filepath = "data/" + filename;
 
     // read data from file
@@ -109,7 +109,4 @@ var IndexController = {
     });
   }
 }
-
-
-
 module.exports = IndexController
