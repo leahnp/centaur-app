@@ -54,8 +54,9 @@ def run_predict(data):
   output = []
 
   for row in data:
-    # for samples with time, zacell
-    samples.append([row[0], row[3]])
+    # for samples with time, average accel
+    # var average_accel = (parseInt(row[1]) + parseInt(row[2]) + parseInt(row[3]))/3
+    samples.append([row[0], row[1]])
     # for samples with time, feat1, feat2, feat3
     # samples.append([row[0], row[6], row[8], row[10]]) 
     features.append([row[6], row[8], row[10]])
@@ -69,6 +70,7 @@ def run_predict(data):
 
   for sample, label in zip(samples, labels):
     # output with time, zaccel and label
+    # console.log(sample[2])
     output.append([sample[0], sample[1], label])
     # output with time, feat1, feat2, feat3, label
     # output.append([sample[0], sample[1], sample[2], sample[3], label])
