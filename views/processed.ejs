@@ -17,9 +17,9 @@
   <script src="//d3js.org/d3.v3.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
 
+    <h2 id='charth2'>Gait Chart</h2>
+    <hr>
     <div class='chart'>
-      <h2>Gait Chart</h2>
-      <hr>
       <script>
         var walk = <%=gaits[0]%>
         var trot = <%=gaits[1]%>
@@ -50,68 +50,69 @@
         });
       </script>
     </div>
+
     <div class='graph'>
       <h2>Rhythm</h2>
       <hr>
       <script>
-        // var margin = {top: 20, right: 20, bottom: 30, left: 50},
-        //     width = 840 - margin.left - margin.right,
-        //     height = 500 - margin.top - margin.bottom;
+        var margin = {top: 20, right: 20, bottom: 30, left: 50},
+            width = 840 - margin.left - margin.right,
+            height = 500 - margin.top - margin.bottom;
 
-        // // var x = d3.scale.linear()
-        // var x = d3.linear()
-        //     .range([0, width]);
+        var x = d3.scale.linear()
+            .range([0, width]);
 
-        // var y = d3.scale.linear()
-        //     .range([height, 0]);
+        var y = d3.scale.linear()
+            .range([height, 0]);
 
-        // var xAxis = d3.svg.axis()
-        //     .scale(x)
-        //     .orient("bottom");
+        var xAxis = d3.svg.axis()
+            .scale(x)
+            .orient("bottom");
 
-        // var yAxis = d3.svg.axis()
-        //     .scale(y)
-        //     .orient("left");
+        var yAxis = d3.svg.axis()
+            .scale(y)
+            .orient("left");
 
-        // var line = d3.svg.line()    
-        //     .x(function(d) { return x(d[0]); })
-        //     .y(function(d) { return y(d[1]); })
-        //     .interpolate("basis");
-        //     // .attr("stroke", "black");
+        var line = d3.svg.line()    
+            .x(function(d) { return x(d[0]); })
+            .y(function(d) { return y(d[1]); })
+            .interpolate("basis");
+            // .attr("stroke", "black");
 
 
-        // var svg = d3.select(".graph").append("svg")
-        //     .attr("width", width + margin.left + margin.right)
-        //     .attr("height", height + margin.top + margin.bottom)
-        //     .append("g")
-        //     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        var svg = d3.select(".graph").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-        //   var data = <%=string_data%>
+          var data = <%=string_data%>
 
-        //   x.domain(d3.extent(data, function(d) { return d[0]; }));
-        //   y.domain(d3.extent(data, function(d) { return d[1]; }));
+          x.domain(d3.extent(data, function(d) { return d[0]; }));
+          y.domain(d3.extent(data, function(d) { return d[1]; }));
 
-        //   svg.append("g")
-        //       .attr("class", "x axis")
-        //       .attr("transform", "translate(0," + height + ")")
-        //       .call(xAxis);
+          svg.append("g")
+              .attr("class", "x axis")
+              .attr("transform", "translate(0," + height + ")")
+              .call(xAxis);
 
-        //   svg.append("g")
-        //       .attr("class", "y axis")
-        //       .call(yAxis);
-        //     // .append("text")
-        //     //   .attr("transform", "rotate(-90)")
-        //     //   .attr("y", 6)
-        //     //   .attr("dy", ".71em")
-        //     //   .style("text-anchor", "end")
-        //     //   .text("Acceleration");
+          svg.append("g")
+              .attr("class", "y axis")
+              .call(yAxis);
+            // .append("text")
+            //   .attr("transform", "rotate(-90)")
+            //   .attr("y", 6)
+            //   .attr("dy", ".71em")
+            //   .style("text-anchor", "end")
+            //   .text("Acceleration");
 
-        //   svg.append("path")
-        //       .datum(data)
-        //       .attr("class", "line")
-        //       .attr("d", line);
+          svg.append("path")
+              .datum(data)
+              .attr("class", "line")
+              .attr("d", line);
       </script>
     </div>
+
   </body>
   <footer>
   </footer>
