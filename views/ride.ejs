@@ -10,9 +10,8 @@
     <div class='nav'>
       <h1><a href="/">CENTAUR</a></h1>
       <ul class='nav-links'>
-          <li><a href="/">Home</a></li>
-          <li><a href="/ride">Dashboard</a></li>
-          <li><a href="/about">About</a></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/ride">Ride</a></li>
       </ul>
     </div>
     <div id="content">
@@ -68,8 +67,14 @@
               data: captureData
             }),
             contentType: "application/json",
+            error: function(xhr, status, err) {
+              alert(xhr)
+              alert(status)
+              alert(err)
+            },
             success: function(data) {
               // reset captureData for next run
+              alert('success!')
               captureData = [];
               console.log(data)
               window.location.reload();
