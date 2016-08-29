@@ -108,6 +108,14 @@ footer {
   margin: 1rem;
 }
 
+#charth2 {
+  text-align: center;
+  background-color: #eff3f4;
+  /*padding: .5rem .5rem;*/
+  padding-top: .5rem;
+  margin: 1rem;
+}
+
 .graph {
   text-align: center;
   background-color: #eff3f4;
@@ -186,8 +194,9 @@ footer {
 }
 
 .header-image h2 {
+  padding-left: 12%;
   display: inline-block;
-  padding-left: 4.5rem;
+  text-shadow: .3px .3px black;
   padding-top: 5rem;
   color: #cf5054;
   font-family: 'Old Standard TT', 'baskerville', serif;
@@ -197,8 +206,9 @@ footer {
 }
 
 .header-image p {
-  padding-left: 4.5rem;
+  padding-left: 12%;
   margin-top: 0;
+  text-shadow: .3px .3px black;
   color: #cf5054;
   font-family: 'Old Standard TT', 'baskerville', serif;
   font-size: 2rem;
@@ -207,13 +217,16 @@ footer {
 }
 
 .first-about {
-  background-color: #cadcdc;
-  width: 100%;
+  background-color: white;
+  box-shadow: 3px 3px 2px #a9a9a9;  
+  width: 80%;
+  margin: auto;
   height: 600px;
   padding-top: 1rem;
 }
 
 .first-about img {
+  /*display: inline-block;*/
   float: left;  
   padding-left: 20%;
   max-height: 300px;
@@ -243,8 +256,13 @@ footer {
   font-size: 1.5rem;
 }
 .points {
+  display: inline-block;
   float: right;
   margin-right: 20%;
+}
+
+.points ul {
+  display: inline-block;
 }
 
 .points img {
@@ -256,9 +274,9 @@ footer {
   font-size: 1rem;
 }
 
-.graph {
+/*.graph {
   width: 50%;
-}
+}*/
 
 .about p {
   text-align: center;
@@ -292,5 +310,8 @@ footer {
   margin: 0px;
   /*font-family: 'Old Standard TT', 'baskerville', serif;*/
   font-size: 3rem;
+}
 
+.spacer {
+  height: 1.5rem;
 }
